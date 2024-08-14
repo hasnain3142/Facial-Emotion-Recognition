@@ -1,0 +1,12 @@
+names:
+- Disgusted
+- Surprised
+- Angry
+- Sad
+- Happy
+- Scared
+- Neutral
+nc: 7
+test: ..\dataset\test/images
+train: ..\dataset\train/images
+val: ..\dataset\valid/images

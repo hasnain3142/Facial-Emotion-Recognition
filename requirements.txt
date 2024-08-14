@@ -1,0 +1,5 @@
+Flask==2.2.5
+opencv-python==4.10.0.84
+ultralytics==8.0.196
+numpy==1.26.4
+pillow==10.4.0

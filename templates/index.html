@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facial Emotion Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .webcam-container {
+            margin-top: 20px;
+        }
+        .result-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Recognition</h1>
+        <div class="button-container">
+            <button onclick="showUploadSection()">Upload Image</button>
+            <button onclick="showWebcamSection()">Start Webcam</button>
+        </div>
+        <div id="upload-section" style="display: none;">
+            <h2>Upload Image for Emotion Recognition</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+        <div id="webcam-section" class="webcam-container" style="display: none;">
+            <h2>Live Webcam Emotion Recognition</h2>
+            <img id="webcam-feed" src="" width="50%">
+        </div>
+        {% if error %}
+        <div class="result-container">
+            <h2 style="color: red;">{{ error }}</h2>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function showUploadSection() {
+            document.getElementById('upload-section').style.display = 'block';
+            document.getElementById('webcam-section').style.display = 'none';
+            stopWebcam();
+        }
+
+        function showWebcamSection() {
+            document.getElementById('upload-section').style.display = 'none';
+            document.getElementById('webcam-section').style.display = 'block';
+            startWebcam();
+        }
+
+        function startWebcam() {
+            fetch('/start_webcam').then(() => {
+                document.getElementById('webcam-feed').src = "{{ url_for('video_feed') }}";
+            });
+        }
+
+        function stopWebcam() {
+            fetch('/stop_webcam').then(() => {
+                document.getElementById('webcam-feed').src = "";
+            });
+        }
+    </script>
+</body>
+</html>

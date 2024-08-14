@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Recognition Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        .result-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Emotion Recognition Result</h1>
+        <div class="result-container">
+            <h2>Original Image</h2>
+            <img src="data:image/jpeg;base64,{{ original_image | b64encode }}" alt="Original Image" width="50%">
+            <h2>Detected Emotion: {{ emotion }}</h2>
+        </div>
+        <a href="/">Go Back</a>
+    </div>
+</body>
+</html>
